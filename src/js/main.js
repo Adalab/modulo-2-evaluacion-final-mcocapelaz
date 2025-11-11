@@ -3,11 +3,17 @@
 // SECCIÓN DE QUERY-SELECTOR
 // Éstos son los elementos que nos traemos de la página HTML y usamos en el código
 
+const searchInput = document.querySelector('.js-search-input');
+const searchButton = document.querySelector('.js-search-btn');
+const addButton = document.querySelector('.js-add-product');
 
 
 // SECCIÓN DE DATOS
 // Variables globales que almacenan la información principal de la aplicación
 // y se usan por todo el fichero.
+
+let products= [];
+let shoppingCartProducts= [];
 
 
 
@@ -36,4 +42,12 @@
 //   - Pedir datos al servidor
 //   - Pintar (render) elementos en la página
 
-console.log('Página y JS cargados!');
+fetch('https://fakestoreapi.com/products')
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+
+
+
+
+
