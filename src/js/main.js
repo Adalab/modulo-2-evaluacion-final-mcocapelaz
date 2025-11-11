@@ -18,16 +18,20 @@ let shoppingCartProducts = [];
 // SECCIÓN DE FUNCIONES
 
 function displayProducts(listToShow) {
-  resultList.innerHTML += "";
+  resultList.innerHTML = "";
   for (let i = 0; i < listToShow.length; i++) {
     const item = listToShow[i];
-    resultList.innerHTML = `<li>
-<div class="js-product-card" data-id="${item.id}"></div>
+    resultList.innerHTML += `<li class="result">
+<div class="product-card" data-id="${item.id}">
 <img src= "${item.image}" alt="${item.title}">
-<h3>"${item.title}"</h3>>
+<h3>"${item.title}"</h3>
 <span class="js-title-card">${item.title}</span>
-<span class="js-price-card">${item.price}</span>
-</li>`;
+<span class="js-price-card">${item.price} €</span>
+</li>
+<button class="addProduct js-add-product" data-id="${item.id}">Comprar</button>
+</div>
+  </li>
+    `;
   }
 }
 

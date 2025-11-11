@@ -8,7 +8,7 @@
       href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./scss/main.scss" />
+    <link rel="stylesheet" href="./css/main.css" />
     <link rel="icon" href="/images/favicon.png" />
   </head>
 
@@ -22,10 +22,16 @@
       <button class="searchBtn js-search-btn">Buscar</button>
 
       <div class="results js-results-container">
-        <ul class="results-list js-results-list">
-          
+        <ul class="results-list js-results-list">          
         </ul>
+       
       </div>
+      <aside class="favorites-section">
+            <h2>Mis Favoritos</h2>
+            <div class="favorites-list js_favorites">
+                <!-- Aquí se pintarán los favoritos desde JS -->
+            </div>
+        </aside>
     </main>
 
     <script src="./js/main.js"></script>
