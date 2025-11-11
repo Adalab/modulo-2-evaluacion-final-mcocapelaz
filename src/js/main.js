@@ -25,7 +25,6 @@ function displayProducts(listToShow) {
 <div class="product-card" data-id="${item.id}">
 <img src= "${item.image}" alt="${item.title}">
 <h3>"${item.title}"</h3>
-<span class="js-title-card">${item.title}</span>
 <span class="js-price-card">${item.price} €</span>
 </li>
 <button class="addProduct js-add-product" data-id="${item.id}">Comprar</button>
