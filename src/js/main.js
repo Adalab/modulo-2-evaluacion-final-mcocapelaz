@@ -5,8 +5,8 @@
 
 const searchInput = document.querySelector(".js-search-input");
 const searchButton = document.querySelector(".js-search-btn");
-const addButton = document.querySelector(".js-add-product");
 const resultList = document.querySelector(".js-results-list");
+const shoppingList = document.querySelector('.js-shopping-list');
 
 // SECCIÓN DE DATOS
 // Variables globales que almacenan la información principal de la aplicación
@@ -24,7 +24,7 @@ function displayProducts(listToShow) {
     resultList.innerHTML = `
       <div class="no-results">
         <p>Lo sentimos, ningún producto coincide con los términos de tu búsqueda.</p>
-        <p>Prueba con otras palabras clave.</p>
+        <p>Haz clic en el botón y prueba con otras palabras clave.</p>
       </div>
     `;
     return;
@@ -59,10 +59,56 @@ function searchProducts() {
   searchInput.value = "";
 }
 
-// function shoppingProducts(){
-//   const shoppingItem = ev.currentTarget;
+function toggleBtn(button) {
+  if (button.classList.contains('clicked')) {
+    button.classList.remove('clicked');
+    button.textContent = 'Comprar';
+    return false; 
+  } else {
+    button.classList.add('clicked');
+    button.textContent = 'Eliminar';
+    return true; 
+  }
+}
 
-// }
+function updateShoppingCart(productId, shouldAddItem) {
+  if (shouldAddItem) {   
+    const foundItem = products.find((item) => {
+      return item.id === productId;
+    });
+    shoppingCartProducts.push(foundItem);
+  } else {
+    
+    shoppingCartProducts = shoppingCartProducts.filter((item) => {
+      return item.id !== productId;
+    });
+  }
+  
+  shoppingProducts();
+}
+
+function shoppingProducts(){  
+   shoppingList.innerHTML = '';
+   if (shoppingCartProducts.length === 0) {
+    shoppingList.innerHTML = '<p>Tu carrito está vacío</p>';
+    return;
+  }
+ 
+  for (let i = 0; i < shoppingCartProducts.length; i++) {
+  const item = shoppingCartProducts[i];    
+  shoppingList.innerHTML += `
+    <div class="cart-item">
+      <img src="${item.image}" alt="${item.title}">
+      <div class="cart-item-info">
+        <h4>${item.title}</h4>
+        <span class="cart-price">${item.price} €</span>
+      </div>
+      <button type="button" class="remove-item" data-id="${item.id}">X</button>
+    </div>
+  `;
+}
+}
+
 
 // Éstas son funciones:
 //   - con código auxiliar
@@ -80,22 +126,14 @@ searchButton.addEventListener("click", searchProducts);
 
 resultList.addEventListener("click", (ev) => {
   const clickedItem = ev.target;
-  if (clickedItem.classList.contains("clicked")) {
-    clickedItem.classList.remove("clicked");
-    clickedItem.textContent = "Comprar";
-  } else {
-    clickedItem.classList.add("clicked");
-    clickedItem.textContent = "Eliminar";
+  if (clickedItem.classList.contains("addProduct")) {
+    const productId = Number(clickedItem.dataset.id);
+    const shouldAddItem = toggleBtn(clickedItem);
+ updateShoppingCart(productId, shouldAddItem);
   }
-
-  const productId = Number(clickedItem.dataset.id);
-  const findNumber = products.find((item) => {
-    return item.id === productId;
-  });
-
-  shoppingCartProducts.push(findNumber);
-  displayShoppingCart();
 });
+ 
+
 
 // SECCIÓN DE ACCIONES AL CARGAR LA PÁGINA
 // Este código se ejecutará cuando se carga la página
