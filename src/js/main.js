@@ -19,6 +19,17 @@ let shoppingCartProducts = [];
 
 function displayProducts(listToShow) {
   resultList.innerHTML = "";
+
+  if (listToShow.length === 0) {
+    resultList.innerHTML = `
+      <div class="no-results">
+        <p>Lo sentimos, ningún producto coincide con los términos de tu búsqueda.</p>
+        <p>Prueba con otras palabras clave.</p>
+      </div>
+    `;
+    return;
+  }
+
   for (let i = 0; i < listToShow.length; i++) {
     const item = listToShow[i];
     resultList.innerHTML += `<li class="result">
@@ -42,7 +53,7 @@ function searchProducts() {
   }
   const filteredProducts = products.filter((item) => {
     return item.title.toLowerCase().includes(searchValue);
-  });
+  });  
 
   displayProducts(filteredProducts);
 }
