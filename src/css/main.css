@@ -12,10 +12,9 @@ body {
 .header {
     background-color: darkcyan;
     padding: 1rem;
-    color: white;
-}
+    color: white;}
 
-/* Layout con Grid - 2 columnas siempre */
+
 .main {
     max-width: 1200px;
     margin: 0 auto;
@@ -31,8 +30,7 @@ body {
     }
 }
 
-/* Carrito siempre a la izquierda, lado a lado */
-.favorites-section {
+.shopping-section {
     background-color: white;
     padding: 0.8rem;
     border-radius: 8px;
@@ -47,7 +45,7 @@ body {
     }
 }
 
-.favorites-list {
+.shopping-list {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
@@ -65,13 +63,13 @@ body {
     width: 100%;
     padding: 0.8rem 2rem;
     font-size: 1rem;
-    background-color: darkcyan;
+    background-color: lightslategray;
     color: white;
     border: none;
     cursor: pointer;
 
     &:hover {
-        background-color: rgb(2, 73, 73);
+        background-color: darkgreen;
     }
 }
 
@@ -127,19 +125,24 @@ body {
 .addProduct {
     width: 100%;
     padding: 0.6rem;
-    background-color: #27ae60;
-    color: white;
+    background-color: darkcyan;
+    color: white;    
     border: none;
     cursor: pointer;
     font-size: 1rem;
     margin-top: auto;
 
     &:hover {
-        background-color: rgb(4, 84, 4);
+        background-color: rgb(6, 86, 86);
     }
 }
 
-/* Tablet y escritorio - más espacio */
+.addProduct.clicked {
+    background-color: lightcoral;
+    color: black;
+    font-weight: bold;
+}
+
 @media (min-width: 768px) {
     .main {
         padding: 2rem;

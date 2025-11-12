@@ -56,7 +56,13 @@ function searchProducts() {
   });
 
   displayProducts(filteredProducts);
+  searchInput.value = "";
 }
+
+// function shoppingProducts(){
+//   const shoppingItem = ev.currentTarget;
+
+// }
 
 // Éstas son funciones:
 //   - con código auxiliar
@@ -72,7 +78,21 @@ function searchProducts() {
 
 searchButton.addEventListener("click", searchProducts);
 
+resultList.addEventListener("click", (ev) => {
+  const clickedItem = ev.target;
 
+  if (clickedItem.classList.contains("addProduct")) {
+    clickedItem.classList.toggle("clicked");
+    const productId = Number(clickedItem.dataset.id);
+    const findNumber = products.find((item) => {
+      return item.id === productId;
+    });
+
+    shoppingCartProducts.push(findNumber);
+
+    displayShoppingCart();
+  }
+});
 
 // SECCIÓN DE ACCIONES AL CARGAR LA PÁGINA
 // Este código se ejecutará cuando se carga la página
