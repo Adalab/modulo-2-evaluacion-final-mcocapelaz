@@ -26,12 +26,25 @@ function displayProducts(listToShow) {
 <img src= "${item.image}" alt="${item.title}">
 <h3>"${item.title}"</h3>
 <span class="js-price-card">${item.price} €</span>
-</li>
 <button class="addProduct js-add-product" data-id="${item.id}">Comprar</button>
+</li>
 </div>
   </li>
     `;
   }
+}
+
+function searchProducts() {
+  const searchValue = searchInput.value.toLowerCase().trim();
+  if (searchValue === "") {
+    displayProducts(products);
+    return;
+  }
+  const filteredProducts = products.filter((item) => {
+    return item.title.toLowerCase().includes(searchValue);
+  });
+
+  displayProducts(filteredProducts);
 }
 
 // Éstas son funciones:
@@ -45,6 +58,12 @@ function displayProducts(listToShow) {
 // SECCIÓN DE EVENTOS
 // Éstos son los eventos a los que reacciona la página
 // Los más comunes son: click (en botones, enlaces), input (en ídem) y submit (en form)
+
+searchButton.addEventListener("click", (ev) => {
+  searchProducts();
+});
+
+searchInput.addEventListener("input", searchProducts);
 
 // SECCIÓN DE ACCIONES AL CARGAR LA PÁGINA
 // Este código se ejecutará cuando se carga la página
