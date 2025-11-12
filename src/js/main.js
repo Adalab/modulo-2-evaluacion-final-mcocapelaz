@@ -53,7 +53,7 @@ function searchProducts() {
   }
   const filteredProducts = products.filter((item) => {
     return item.title.toLowerCase().includes(searchValue);
-  });  
+  });
 
   displayProducts(filteredProducts);
 }
@@ -70,11 +70,9 @@ function searchProducts() {
 // Éstos son los eventos a los que reacciona la página
 // Los más comunes son: click (en botones, enlaces), input (en ídem) y submit (en form)
 
-searchButton.addEventListener("click", (ev) => {
-  searchProducts();
-});
+searchButton.addEventListener("click", searchProducts);
 
-searchInput.addEventListener("input", searchProducts);
+
 
 // SECCIÓN DE ACCIONES AL CARGAR LA PÁGINA
 // Este código se ejecutará cuando se carga la página
