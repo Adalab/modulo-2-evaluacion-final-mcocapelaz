@@ -1,22 +1,20 @@
 "use strict";
 
-// SECCIÓN DE QUERY-SELECTOR
-// Éstos son los elementos que nos traemos de la página HTML y usamos en el código
-
+// QUERY SELECTORS
 const searchInput = document.querySelector(".js-search-input");
 const searchButton = document.querySelector(".js-search-btn");
 const resultList = document.querySelector(".js-results-list");
 const shoppingList = document.querySelector(".js-shopping-list");
 
-// SECCIÓN DE DATOS
-// Variables globales que almacenan la información principal de la aplicación
-// y se usan por todo el fichero.
-
+// DATOS
 let products = [];
 let shoppingCartProducts = [];
+const savedShoppingCart = localStorage.getItem("shoppingCartProducts");
+if (savedShoppingCart) {
+  shoppingCartProducts = JSON.parse(savedShoppingCart);
+}
 
-// SECCIÓN DE FUNCIONES
-
+// FUNCIONES
 function displayProducts(listToShow) {
   resultList.innerHTML = "";
 
@@ -32,15 +30,15 @@ function displayProducts(listToShow) {
 
   for (let i = 0; i < listToShow.length; i++) {
     const item = listToShow[i];
-    resultList.innerHTML += `<li class="result">
-<div class="product-card" data-id="${item.id}">
-<img src= "${item.image}" alt="${item.title}">
-<h3>"${item.title}"</h3>
-<span class="js-price-card">${item.price} €</span>
-<button class="addProduct js-add-product" data-id="${item.id}">Comprar</button>
-</li>
-</div>
-  </li>
+    resultList.innerHTML += `
+      <li class="result">
+        <div class="product-card" data-id="${item.id}">
+          <img src="${item.image}" alt="${item.title}">
+          <h3>${item.title}</h3>
+          <span class="js-price-card">${item.price} €</span>
+          <button type="button" class="addProduct js-add-product" data-id="${item.id}">Comprar</button>
+        </div>
+      </li>
     `;
   }
 }
@@ -83,11 +81,16 @@ function updateShoppingCart(productId, shouldAddItem) {
     });
   }
 
+  localStorage.setItem(
+    "shoppingCartProducts",
+    JSON.stringify(shoppingCartProducts)
+  );
   shoppingProducts();
 }
 
 function shoppingProducts() {
   shoppingList.innerHTML = "";
+
   if (shoppingCartProducts.length === 0) {
     shoppingList.innerHTML = "<p>Tu carrito está vacío</p>";
     return;
@@ -96,32 +99,19 @@ function shoppingProducts() {
   for (let i = 0; i < shoppingCartProducts.length; i++) {
     const item = shoppingCartProducts[i];
     shoppingList.innerHTML += `
-    <div class="cart-item">
-      <img src="${item.image}" alt="${item.title}">
-      <div class="cart-item-info">
-        <h4>${item.title}</h4>
-        <span class="cart-price">${item.price} €</span>
+      <div class="cart-item">
+        <img src="${item.image}" alt="${item.title}">
+        <div class="cart-item-info">
+          <h4>${item.title}</h4>
+          <span class="cart-price">${item.price} €</span>
+        </div>
+        <button type="button" class="remove-item" data-id="${item.id}">X</button>
       </div>
-      <button type="button" class="remove-item" data-id="${item.id}">X</button>
-    </div>
-  `;
+    `;
   }
 }
 
-// Éstas son funciones:
-//   - con código auxiliar
-//   - con código que usaremos en los eventos
-//   - para pintar (render) en la página.
-
-// SECCIÓN DE FUNCIONES DE EVENTOS
-// Aquí van las funciones handler/manejadoras de eventos
-
-// SECCIÓN DE EVENTOS
-// Éstos son los eventos a los que reacciona la página
-// Los más comunes son: click (en botones, enlaces), input (en ídem) y submit (en form)
-
-searchButton.addEventListener("click", searchProducts);
-
+// EVENTOS
 resultList.addEventListener("click", (ev) => {
   const clickedItem = ev.target;
   if (clickedItem.classList.contains("addProduct")) {
@@ -135,10 +125,15 @@ shoppingList.addEventListener("click", (ev) => {
   const clickedItem = ev.target;
   if (clickedItem.classList.contains("remove-item")) {
     const productId = Number(clickedItem.dataset.id);
+
     shoppingCartProducts = shoppingCartProducts.filter((item) => {
       return item.id !== productId;
     });
 
+    localStorage.setItem(
+      "shoppingCartProducts",
+      JSON.stringify(shoppingCartProducts)
+    );
     shoppingProducts();
 
     const shoppingBtn = document.querySelector(
@@ -151,17 +146,14 @@ shoppingList.addEventListener("click", (ev) => {
   }
 });
 
-// SECCIÓN DE ACCIONES AL CARGAR LA PÁGINA
-// Este código se ejecutará cuando se carga la página
-// Lo más común es:
-//   - Pedir datos al servidor
-//   - Pintar (render) elementos en la página
+searchButton.addEventListener("click", searchProducts);
 
 fetch("https://fakestoreapi.com/products")
   .then((response) => response.json())
   .then((data) => {
     products = data;
     displayProducts(products);
-  })
 
+    shoppingProducts();
+  })
   .catch((error) => console.error("Error:", error));
