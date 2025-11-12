@@ -6,7 +6,7 @@
 const searchInput = document.querySelector(".js-search-input");
 const searchButton = document.querySelector(".js-search-btn");
 const resultList = document.querySelector(".js-results-list");
-const shoppingList = document.querySelector('.js-shopping-list');
+const shoppingList = document.querySelector(".js-shopping-list");
 
 // SECCIÓN DE DATOS
 // Variables globales que almacenan la información principal de la aplicación
@@ -60,43 +60,42 @@ function searchProducts() {
 }
 
 function toggleBtn(button) {
-  if (button.classList.contains('clicked')) {
-    button.classList.remove('clicked');
-    button.textContent = 'Comprar';
-    return false; 
+  if (button.classList.contains("clicked")) {
+    button.classList.remove("clicked");
+    button.textContent = "Comprar";
+    return false;
   } else {
-    button.classList.add('clicked');
-    button.textContent = 'Eliminar';
-    return true; 
+    button.classList.add("clicked");
+    button.textContent = "Eliminar";
+    return true;
   }
 }
 
 function updateShoppingCart(productId, shouldAddItem) {
-  if (shouldAddItem) {   
+  if (shouldAddItem) {
     const foundItem = products.find((item) => {
       return item.id === productId;
     });
     shoppingCartProducts.push(foundItem);
   } else {
-    
     shoppingCartProducts = shoppingCartProducts.filter((item) => {
       return item.id !== productId;
     });
   }
-  
+
   shoppingProducts();
 }
 
-function shoppingProducts(){  
-   shoppingList.innerHTML = '';
-   if (shoppingCartProducts.length === 0) {
-    shoppingList.innerHTML = '<p>Tu carrito está vacío</p>';
+function shoppingProducts() {
+  shoppingList.innerHTML = "";
+  if (shoppingCartProducts.length === 0) {
+    shoppingList.innerHTML = "<p>Tu carrito está vacío</p>";
     return;
   }
- 
+
   for (let i = 0; i < shoppingCartProducts.length; i++) {
-  const item = shoppingCartProducts[i];    
-  shoppingList.innerHTML += `
+    const item = shoppingCartProducts[i];
+    shoppingList.innerHTML += `
     <div class="cart-item">
       <img src="${item.image}" alt="${item.title}">
       <div class="cart-item-info">
@@ -106,9 +105,8 @@ function shoppingProducts(){
       <button type="button" class="remove-item" data-id="${item.id}">X</button>
     </div>
   `;
+  }
 }
-}
-
 
 // Éstas son funciones:
 //   - con código auxiliar
@@ -129,11 +127,29 @@ resultList.addEventListener("click", (ev) => {
   if (clickedItem.classList.contains("addProduct")) {
     const productId = Number(clickedItem.dataset.id);
     const shouldAddItem = toggleBtn(clickedItem);
- updateShoppingCart(productId, shouldAddItem);
+    updateShoppingCart(productId, shouldAddItem);
   }
 });
- 
 
+shoppingList.addEventListener("click", (ev) => {
+  const clickedItem = ev.target;
+  if (clickedItem.classList.contains("remove-item")) {
+    const productId = Number(clickedItem.dataset.id);
+    shoppingCartProducts = shoppingCartProducts.filter((item) => {
+      return item.id !== productId;
+    });
+
+    shoppingProducts();
+
+    const shoppingBtn = document.querySelector(
+      `.addProduct[data-id="${productId}"]`
+    );
+    if (shoppingBtn) {
+      shoppingBtn.classList.remove("clicked");
+      shoppingBtn.textContent = "Comprar";
+    }
+  }
+});
 
 // SECCIÓN DE ACCIONES AL CARGAR LA PÁGINA
 // Este código se ejecutará cuando se carga la página
