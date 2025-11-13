@@ -164,7 +164,8 @@ shoppingList.addEventListener("click", (ev) => {
 
 searchButton.addEventListener("click", searchProducts);
 
-// CÓDIGO AL CARGAR LA PÁGINA
+//CÓDIGO AL CARGAR LA PÁGINA
+
 fetch("https://fakestoreapi.com/products")
   .then((response) => response.json())
   .then((data) => {
