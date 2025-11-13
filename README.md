@@ -62,35 +62,6 @@ La aplicación muestra productos de [Fake Store API](https://fakestoreapi.com/pr
 2. El producto se eliminará del carrito
 3. El botón volverá a mostrar "Comprar"
 
-## Estructura del Código
-
-### JavaScript (`main.js`)
-
-```
-├── QUERY SELECTORS - Elementos del DOM
-├── DATOS - Variables globales y localStorage
-├── FUNCIONES
-│   ├── displayProducts() - Renderiza productos
-│   ├── searchProducts() - Filtra por búsqueda
-│   ├── toggleBtn() - Cambia estado del botón
-│   ├── updateShoppingCart() - Actualiza carrito
-│   └── shoppingProducts() - Renderiza carrito
-├── EVENTOS - Event listeners
-└── CÓDIGO INICIAL - Fetch de productos
-
-### SCSS (`main.scss`) 
-
-├── Variables - Colores y valores reutilizables
-├── Reset - Normalización de estilos
-├── Layout - Grid y estructura principal
-├── Componentes
-│   ├── Header
-│   ├── Shopping Section
-│   ├── Search
-│   ├── Product Card
-│   └── Cart Item
-└── Media Queries - Responsive design (768px+)
-
 ### Tecnologías Utilizadas
 HTML5 - Estructura semántica
 
@@ -135,6 +106,35 @@ El carrito no se guarda:
 * Verifica que tu navegador permita localStorage
 
 * No uses modo incógnito/privado
+
+## Estructura del Código
+
+### JavaScript (`main.js`)
+
+```
+├── QUERY SELECTORS - Elementos del DOM
+├── DATOS - Variables globales y localStorage
+├── FUNCIONES
+│   ├── displayProducts() - Renderiza productos
+│   ├── searchProducts() - Filtra por búsqueda
+│   ├── toggleBtn() - Cambia estado del botón
+│   ├── updateShoppingCart() - Actualiza carrito
+│   └── shoppingProducts() - Renderiza carrito
+├── EVENTOS - Event listeners
+└── CÓDIGO INICIAL - Fetch de productos
+
+### SCSS (`main.scss`) 
+
+├── Variables - Colores y valores reutilizables
+├── Reset - Normalización de estilos
+├── Layout - Grid y estructura principal
+├── Componentes
+│   ├── Header
+│   ├── Shopping Section
+│   ├── Search
+│   ├── Product Card
+│   └── Cart Item
+└── Media Queries - Responsive design (768px+)
 
 ###  Licencia
 Este proyecto es de código abierto y está disponible para uso educativo.
