@@ -148,6 +148,12 @@ shoppingList.addEventListener("click", (ev) => {
 
 searchButton.addEventListener("click", searchProducts);
 
+resultList.addEventListener("click", function (event) {
+  if (event.target.classList.contains("js-add-product")) {
+    event.target.closest(".product-card").classList.toggle("selected");
+  }
+});
+
 fetch("https://fakestoreapi.com/products")
   .then((response) => response.json())
   .then((data) => {
