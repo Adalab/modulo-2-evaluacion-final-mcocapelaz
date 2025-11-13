@@ -9,12 +9,14 @@ const shoppingList = document.querySelector(".js-shopping-list");
 // DATOS
 let products = [];
 let shoppingCartProducts = [];
+
 const savedShoppingCart = localStorage.getItem("shoppingCartProducts");
 if (savedShoppingCart) {
   shoppingCartProducts = JSON.parse(savedShoppingCart);
 }
 
 // FUNCIONES
+
 function displayProducts(listToShow) {
   resultList.innerHTML = "";
 
@@ -45,10 +47,12 @@ function displayProducts(listToShow) {
 
 function searchProducts() {
   const searchValue = searchInput.value.toLowerCase().trim();
+  
   if (searchValue === "") {
     displayProducts(products);
     return;
   }
+  
   const filteredProducts = products.filter((item) => {
     return item.title.toLowerCase().includes(searchValue);
   });
@@ -112,15 +116,26 @@ function shoppingProducts() {
 }
 
 // EVENTOS
+
+// Evento para añadir productos al carrito Y cambiar estilo de tarjeta
 resultList.addEventListener("click", (ev) => {
   const clickedItem = ev.target;
   if (clickedItem.classList.contains("addProduct")) {
     const productId = Number(clickedItem.dataset.id);
     const shouldAddItem = toggleBtn(clickedItem);
     updateShoppingCart(productId, shouldAddItem);
+    
+    // Cambiar estilo de la tarjeta según el estado
+    const productCard = clickedItem.closest('.product-card');
+    if (shouldAddItem) {
+      productCard.classList.add('selected');
+    } else {
+      productCard.classList.remove('selected');
+    }
   }
 });
 
+// Evento para eliminar productos del carrito
 shoppingList.addEventListener("click", (ev) => {
   const clickedItem = ev.target;
   if (clickedItem.classList.contains("remove-item")) {
@@ -136,30 +151,34 @@ shoppingList.addEventListener("click", (ev) => {
     );
     shoppingProducts();
 
+    // Actualizar botón Y tarjeta en la lista de productos
     const shoppingBtn = document.querySelector(
       `.addProduct[data-id="${productId}"]`
     );
     if (shoppingBtn) {
       shoppingBtn.classList.remove("clicked");
       shoppingBtn.textContent = "Comprar";
+      
+      const productCard = shoppingBtn.closest('.product-card');
+      if (productCard) {
+        productCard.classList.remove('selected');
+      }
     }
   }
 });
 
+// Evento del botón de búsqueda
 searchButton.addEventListener("click", searchProducts);
 
-resultList.addEventListener("click", function (event) {
-  if (event.target.classList.contains("js-add-product")) {
-    event.target.closest(".product-card").classList.toggle("selected");
-  }
-});
-
+// CARGAR PRODUCTOS AL INICIO
 fetch("https://fakestoreapi.com/products")
   .then((response) => response.json())
   .then((data) => {
     products = data;
     displayProducts(products);
-
     shoppingProducts();
   })
   .catch((error) => console.error("Error:", error));
+
+
+ 
