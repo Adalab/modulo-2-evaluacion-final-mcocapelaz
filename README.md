@@ -2,6 +2,8 @@
 
 Este ejercicio final consiste en una tienda online creada con HTML, SCSS y JavaScript. Permite buscar productos, añadirlos al carrito y gestionar las compras con almacenamiento local.
 
+Enlace de GitHub Pages: https://beta.adalab.es/modulo-2-evaluacion-final-mcocapelaz/
+
 ## Características
 
 - **Catálogo de productos** - Carga dinámica desde API REST
