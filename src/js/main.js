@@ -16,7 +16,6 @@ if (savedShoppingCart) {
 }
 
 // FUNCIONES
-
 function displayProducts(listToShow) {
   resultList.innerHTML = "";
 
@@ -47,12 +46,12 @@ function displayProducts(listToShow) {
 
 function searchProducts() {
   const searchValue = searchInput.value.toLowerCase().trim();
-  
+
   if (searchValue === "") {
     displayProducts(products);
     return;
   }
-  
+
   const filteredProducts = products.filter((item) => {
     return item.title.toLowerCase().includes(searchValue);
   });
@@ -117,25 +116,22 @@ function shoppingProducts() {
 
 // EVENTOS
 
-// Evento para añadir productos al carrito Y cambiar estilo de tarjeta
 resultList.addEventListener("click", (ev) => {
   const clickedItem = ev.target;
   if (clickedItem.classList.contains("addProduct")) {
     const productId = Number(clickedItem.dataset.id);
     const shouldAddItem = toggleBtn(clickedItem);
     updateShoppingCart(productId, shouldAddItem);
-    
-    // Cambiar estilo de la tarjeta según el estado
-    const productCard = clickedItem.closest('.product-card');
+
+    const productCard = clickedItem.closest(".product-card");
     if (shouldAddItem) {
-      productCard.classList.add('selected');
+      productCard.classList.add("selected");
     } else {
-      productCard.classList.remove('selected');
+      productCard.classList.remove("selected");
     }
   }
 });
 
-// Evento para eliminar productos del carrito
 shoppingList.addEventListener("click", (ev) => {
   const clickedItem = ev.target;
   if (clickedItem.classList.contains("remove-item")) {
@@ -151,26 +147,24 @@ shoppingList.addEventListener("click", (ev) => {
     );
     shoppingProducts();
 
-    // Actualizar botón Y tarjeta en la lista de productos
     const shoppingBtn = document.querySelector(
       `.addProduct[data-id="${productId}"]`
     );
     if (shoppingBtn) {
       shoppingBtn.classList.remove("clicked");
       shoppingBtn.textContent = "Comprar";
-      
-      const productCard = shoppingBtn.closest('.product-card');
+
+      const productCard = shoppingBtn.closest(".product-card");
       if (productCard) {
-        productCard.classList.remove('selected');
+        productCard.classList.remove("selected");
       }
     }
   }
 });
 
-// Evento del botón de búsqueda
 searchButton.addEventListener("click", searchProducts);
 
-// CARGAR PRODUCTOS AL INICIO
+// CÓDIGO AL CARGAR LA PÁGINA
 fetch("https://fakestoreapi.com/products")
   .then((response) => response.json())
   .then((data) => {
@@ -179,6 +173,3 @@ fetch("https://fakestoreapi.com/products")
     shoppingProducts();
   })
   .catch((error) => console.error("Error:", error));
-
-
- 
