@@ -1,40 +1,143 @@
-# Mi proyecto
+# Tu tienda de caprichos online
 
-A rellenar
+Este ejercicio final consiste en una tienda online creada con HTML, SCSS y JavaScript. Permite buscar productos, añadirlos al carrito y gestionar las compras con almacenamiento local.
 
-## Guía de inicio rápido
+## Características
 
-> **NOTA:** Necesitas tener instalado [Node JS](https://nodejs.org/) con una versión superior a la 14 para trabajar con este Starter Kit:
+- **Catálogo de productos** - Carga dinámica desde API REST
+- **Buscador en tiempo real** - Filtra productos por nombre
+- **Carrito de compras** - Añade y elimina productos
+- **Persistencia de datos** - El carrito se guarda en localStorage
+- **Diseño responsive** - Mobile-first design y adaptación a desktop
+- **Interfaz visual** - Feedback visual al añadir productos
+- **Sin dependencias** - JavaScript vanilla puro
 
-### Pasos a seguir cada vez que queremos arrancar un proyecto desde cero:
+## Demo
 
-1. **Crea tu propio repositorio.**
-1. Descarga este **Starter kit desde GitHub**.
-   - No recomendamos que clones este repo ya que no podrás añadir commits.
-1. **Copia todos los ficheros** de este Starter kit en la carpeta raíz de tu repositorio.
-   - Recuerda que debes copiar **también los ficheros ocultos** que comienzan por un punto.
-   - Si has decidido clonar este repo, no debes copiar la carpeta `.git`. Si lo haces estarás machacando tu propio repositorio.
-1. **Abre una terminal** en la carpeta raíz de tu repositorio.
-1. **Instala las dependencias** locales ejecutando en la terminal el comando:
+La aplicación muestra productos de [Fake Store API](https://fakestoreapi.com/products) con imágenes reales y precios.
 
-```bash
-npm install
+## Requisitos Previos
+
+- Navegador web moderno (Chrome, Firefox, Safari, Edge)
+- Extensión Live Server para VSCode (recomendado) o cualquier servidor local
+- Para compilar SCSS: Live Sass Compiler (extensión de VSCode)
+
+## Instalación
+
+1. **Clona o descarga el proyecto**
+
+2. **Estructura del proyecto:**
+   ```
+   proyecto/
+   ├── index.html
+   ├── js/
+   │   └── main.js
+   ├── scss/
+   │   └── main.scss
+   └── css/
+       └── main.css (generado automáticamente)
+   ```   ```
+
+3. **Abre el proyecto:**
+   - Haz clic derecho en `index.html`
+   - Selecciona "Open with Live Server"
+   - O simplemente abre `index.html` en tu navegador
+
+## Uso
+
+### Buscar Productos
+1. Escribe el nombre del producto en el buscador
+2. Haz clic en "Buscar"
+3. Los resultados se filtrarán automáticamente
+
+### Añadir al Carrito
+1. Recorre el catálogo de productos
+2. Haz clic en el botón "Comprar" del producto deseado
+3. El producto se añadirá al carrito (en el lateral izquierdo)
+4. La tarjeta del producto seleccionado cambiará de color
+5. El botón "Comprar" cambiará de color y mostrará "Eliminar"
+
+### Eliminar del Carrito
+1. En el carrito, haz clic en el botón "X" del producto
+2. El producto se eliminará del carrito
+3. El botón volverá a mostrar "Comprar"
+
+## Estructura del Código
+
+### JavaScript (`main.js`)
+
 ```
+├── QUERY SELECTORS - Elementos del DOM
+├── DATOS - Variables globales y localStorage
+├── FUNCIONES
+│   ├── displayProducts() - Renderiza productos
+│   ├── searchProducts() - Filtra por búsqueda
+│   ├── toggleBtn() - Cambia estado del botón
+│   ├── updateShoppingCart() - Actualiza carrito
+│   └── shoppingProducts() - Renderiza carrito
+├── EVENTOS - Event listeners
+└── CÓDIGO INICIAL - Fetch de productos
 
-### Pasos para arrancar el proyecto:
+### SCSS (`main.scss`) 
 
-Una vez hemos instalado las dependencias, vamos a arrancar el proyecto. **El proyecto hay que arrancarlo cada vez que te pongas a programar.** Para ello ejecuta el comando:
+├── Variables - Colores y valores reutilizables
+├── Reset - Normalización de estilos
+├── Layout - Grid y estructura principal
+├── Componentes
+│   ├── Header
+│   ├── Shopping Section
+│   ├── Search
+│   ├── Product Card
+│   └── Cart Item
+└── Media Queries - Responsive design (768px+)
 
-```bash
-npm run dev
-```
+### Tecnologías Utilizadas
+HTML5 - Estructura semántica
 
-Este comando:
+SCSS/CSS3 - Estilos y diseño:
 
-- **Abre una ventana de Chrome y muestra tu página web**, al igual que hace el plugin de VS Code Live Server (Go live).
-- También **observa** todos los ficheros que hay dentro de la carpeta `src/`, para que cada vez que modifiques un fichero **refresca tu página en Chrome**.
-- También **procesa los ficheros** HTML, SASS / CSS y JS. Por ejemplo:
-  - Convierte los ficheros SASS en CSS.
-  - Combina los diferentes ficheros de HTML y los agrupa en uno o varios ficheros HTML.
+* CSS Grid
 
-Después de ejecutar `npm run dev` ya puedes empezar a editar todos los ficheros que están dentro de la carpeta `src/` y programar cómodamente.
+* Flexbox
+
+* Variables SCSS
+
+* Media Queries
+
+JavaScript- código: 
+
+* Fetch API
+
+* LocalStorage
+
+* Event Delegation
+
+* Template Literals
+
+### Funcionalidades Técnicas:
+
+* LocalStorage: Los productos del carrito se guardan automáticamente en el navegador. Permanecen aunque se cierre la página.
+
+* Event Delegation: Se usa delegación de eventos para manejar clicks en elementos dinámicos (productos generados por JavaScript).
+
+### Solución de Problemas
+
+Los productos no cargan:
+
+* Verifica tu conexión a internet
+
+* Abre la consola del navegador (F12) para ver errores
+
+* Comprueba que la API esté funcionando
+
+El carrito no se guarda:
+
+* Verifica que tu navegador permita localStorage
+
+* No uses modo incógnito/privado
+
+###  Licencia
+Este proyecto es de código abierto y está disponible para uso educativo.
+
+###  Agradecimientos
+Fake Store API por proporcionar los datos de productos
