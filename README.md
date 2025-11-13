@@ -18,12 +18,6 @@ Enlace de GitHub Pages: https://beta.adalab.es/modulo-2-evaluacion-final-mcocape
 
 La aplicación muestra productos de [Fake Store API](https://fakestoreapi.com/products) con imágenes reales y precios.
 
-## Requisitos Previos
-
-- Navegador web moderno (Chrome, Firefox, Safari, Edge)
-- Extensión Live Server para VSCode (recomendado) o cualquier servidor local
-- Para compilar SCSS: Live Sass Compiler (extensión de VSCode)
-
 ## Instalación
 
 1. **Clona o descarga el proyecto**
@@ -64,82 +58,11 @@ La aplicación muestra productos de [Fake Store API](https://fakestoreapi.com/pr
 2. El producto se eliminará del carrito
 3. El botón volverá a su color original y mostrará "Comprar"
 
-### Tecnologías Utilizadas
-HTML5 - Estructura semántica
-
-SCSS/CSS3 - Estilos y diseño:
-
-* CSS Grid
-
-* Flexbox
-
-* Variables SCSS
-
-* Media Queries
-
-JavaScript- código: 
-
-* Fetch API
-
-* LocalStorage
-
-* Event Delegation
-
-* Template Literals
-
 ### Funcionalidades Técnicas:
-
 * LocalStorage: Los productos del carrito se guardan automáticamente en el navegador. Permanecen aunque se cierre la página.
-
 * Event Delegation: Se usa delegación de eventos para manejar clicks en elementos dinámicos (productos generados por JavaScript).
 
-### Solución de Problemas
+###  Licencia: Este proyecto es de código abierto y está disponible para uso educativo.
+###  Autora: Mónica Coca- promo 58 (Adalab). 
 
-Los productos no cargan:
 
-* Verifica tu conexión a internet
-
-* Abre la consola del navegador (F12) para ver errores
-
-* Comprueba que la API esté funcionando
-
-El carrito no se guarda:
-
-* Verifica que tu navegador permita localStorage
-
-* No uses modo incógnito/privado
-
-## Estructura del Código
-
-### JavaScript (`main.js`)
-
-```
-├── QUERY SELECTORS - Elementos del DOM
-├── DATOS - Variables globales y localStorage
-├── FUNCIONES
-│   ├── displayProducts() - Renderiza productos
-│   ├── searchProducts() - Filtra por búsqueda
-│   ├── toggleBtn() - Cambia estado del botón
-│   ├── updateShoppingCart() - Actualiza carrito
-│   └── shoppingProducts() - Renderiza carrito
-├── EVENTOS - Event listeners
-└── CÓDIGO INICIAL - Fetch de productos
-
-### SCSS (`main.scss`) 
-
-├── Variables - Colores y valores reutilizables
-├── Reset - Normalización de estilos
-├── Layout - Grid y estructura principal
-├── Componentes
-│   ├── Header
-│   ├── Shopping Section
-│   ├── Search
-│   ├── Product Card
-│   └── Cart Item
-└── Media Queries - Responsive design (768px+)
-
-###  Licencia
-Este proyecto es de código abierto y está disponible para uso educativo.
-
-###  Agradecimientos
-Fake Store API por proporcionar los datos de productos
