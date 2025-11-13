@@ -60,7 +60,7 @@ La aplicación muestra productos de [Fake Store API](https://fakestoreapi.com/pr
 ### Eliminar del Carrito
 1. En el carrito, haz clic en el botón "X" del producto
 2. El producto se eliminará del carrito
-3. El botón volverá a mostrar "Comprar"
+3. El botón volverá a su color original y mostrará "Comprar"
 
 ### Tecnologías Utilizadas
 HTML5 - Estructura semántica
